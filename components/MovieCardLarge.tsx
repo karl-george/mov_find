@@ -1,7 +1,7 @@
 import { View, Text, Image } from 'react-native';
 import React from 'react';
 
-type Movie = {
+export type Movie = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
