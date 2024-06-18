@@ -8,7 +8,7 @@ const CustomHeader = () => {
 
   return (
     <SafeAreaView>
-      <View className='w-full h-16 px-4 bg-primary'>
+      <View className='w-full h-16 px-4 pt-6 bg-primary'>
         <View className='flex-row items-center px-4 rounded-md bg-secondary h-14'>
           <TextInput
             className='flex-1 text-text font-acme'
@@ -18,7 +18,7 @@ const CustomHeader = () => {
             onChangeText={(e) => setQuery(e)}
           />
           <TouchableOpacity>
-            <Ionicons name='search' size={24} color='#FAFAFA' />
+            <Ionicons name='search' size={26} color='#FAFAFA' />
           </TouchableOpacity>
         </View>
       </View>
