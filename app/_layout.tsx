@@ -13,21 +13,17 @@ export {
 SplashScreen.preventAutoHideAsync();
 
 const InitialLayout = () => {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
+  const [fontsLoaded, fontError] = useFonts({
+    'Acme-Regular': require('../assets/fonts/Acme-Regular.ttf'),
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
-    if (error) throw error;
-  }, [error]);
+    if (fontError) throw fontError;
+    if (fontsLoaded) SplashScreen.hideAsync();
+  }, [fontsLoaded, fontError]);
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+  if (!fontsLoaded && !fontError) null;
 
   return (
     <Stack>

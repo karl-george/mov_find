@@ -10,6 +10,9 @@ module.exports = {
         accent: '#1E778F',
         text: '#FAFAFA',
       },
+      fontFamily: {
+        acme: ['Acme', 'sans-serif'],
+      },
     },
   },
   plugins: [],
