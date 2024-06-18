@@ -7,22 +7,20 @@ const CustomHeader = () => {
   const [query, setQuery] = useState('');
 
   return (
-    <SafeAreaView>
-      <View className='w-full h-16 px-4 pt-6 bg-primary'>
-        <View className='flex-row items-center px-4 rounded-md bg-secondary h-14'>
-          <TextInput
-            className='flex-1 text-text font-acme'
-            placeholder='Search for movies...'
-            placeholderTextColor={'#30343F'}
-            value={query}
-            onChangeText={(e) => setQuery(e)}
-          />
-          <TouchableOpacity>
-            <Ionicons name='search' size={26} color='#FAFAFA' />
-          </TouchableOpacity>
-        </View>
+    <View className='w-full h-16 px-4 py-14 bg-primary'>
+      <View className='flex-row items-center px-4 rounded-md bg-secondary h-14'>
+        <TextInput
+          className='flex-1 text-text font-acme'
+          placeholder='Search for movies...'
+          placeholderTextColor={'#30343F'}
+          value={query}
+          onChangeText={(e) => setQuery(e)}
+        />
+        <TouchableOpacity>
+          <Ionicons name='search' size={26} color='#FAFAFA' />
+        </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
