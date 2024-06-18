@@ -1,7 +1,8 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import CustomHeader from '@/components/CustomHeader';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 
 export {
@@ -28,12 +29,23 @@ const InitialLayout = () => {
   return (
     <Stack>
       <Stack.Screen name='index' options={{ headerShown: false }} />
+      <Stack.Screen
+        name='home'
+        options={{
+          header: () => <CustomHeader />,
+        }}
+      />
     </Stack>
   );
 };
 
 const RootLayoutNav = () => {
-  return <InitialLayout />;
+  return (
+    <>
+      <StatusBar style='dark' />
+      <InitialLayout />
+    </>
+  );
 };
 
 export default RootLayoutNav;
