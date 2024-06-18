@@ -3,8 +3,8 @@ import React from 'react';
 
 export default function index() {
   return (
-    <View>
-      <Text>index</Text>
+    <View className='w-full h-full bg-primary'>
+      <Text className=''>index Hi Check</Text>
     </View>
   );
 }
