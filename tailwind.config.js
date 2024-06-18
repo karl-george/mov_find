@@ -11,7 +11,7 @@ module.exports = {
         text: '#FAFAFA',
       },
       fontFamily: {
-        acme: ['Acme', 'sans-serif'],
+        acme: ['Acme-Regular', 'sans-serif'],
       },
     },
   },
