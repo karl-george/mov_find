@@ -9,8 +9,16 @@ interface Props {
 
 const Genre = ({ genre, setGenreSelected, genreSelected }: Props) => {
   return (
-    <TouchableOpacity>
-      <Text className='mr-2 text-lg capitalize text-text'>{genre.name}</Text>
+    <TouchableOpacity onPress={() => setGenreSelected(genre.name)}>
+      <Text
+        className={`mr-2 text-xl capitalize font-acme ${
+          genreSelected === genre.name
+            ? 'text-text border-l border-blue-400 pl-1.5'
+            : 'text-tertiary'
+        }`}
+      >
+        {genre.name}
+      </Text>
     </TouchableOpacity>
   );
 };

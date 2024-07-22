@@ -6,7 +6,7 @@ import GenreList from '@/components/GenreList';
 
 import { movies } from '../constants/data';
 const Home = () => {
-  const [genreSelected, setGenreSelected] = useState('');
+  const [genreSelected, setGenreSelected] = useState('Latest');
 
   const topMovies = movies.results.slice(0, 5);
   const latestMovies = movies.results.slice(0, 9);

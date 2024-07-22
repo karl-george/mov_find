@@ -346,6 +346,7 @@ export const movies = {
 };
 
 export const genres = [
+  { id: 0, name: 'Latest' },
   {
     id: 28,
     name: 'Action',
