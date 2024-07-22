@@ -1,11 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FlatList, SafeAreaView, ScrollView, Text, View } from 'react-native';
-import data from '../constants/data.json';
 import MovieCardLarge from '@/components/MovieCardLarge';
 import MovieCardSmall from '@/components/MovieCardSmall';
+import GenreList from '@/components/GenreList';
+
+import { movies } from '../constants/data';
 const Home = () => {
-  const topMovies = data.results.slice(0, 5);
-  const latestMovies = data.results.slice(0, 9);
+  const [genreSelected, setGenreSelected] = useState('');
+
+  const topMovies = movies.results.slice(0, 5);
+  const latestMovies = movies.results.slice(0, 9);
 
   const fetchTopMovies = async () => {
     const options = {
@@ -72,6 +76,10 @@ const Home = () => {
           />
         </View>
         {/* TODO: Categories */}
+        <GenreList
+          setGenreSelected={setGenreSelected}
+          genreSelected={genreSelected}
+        />
         {/* Latest Movies */}
         <View className='mt-3'>
           <Text className='text-2xl text-text font-acme'>Latest Movies</Text>
