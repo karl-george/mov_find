@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import data from '../constants/data.json';
 import MovieCardLarge from '@/components/MovieCardLarge';
 import MovieCardSmall from '@/components/MovieCardSmall';
 const Home = () => {
   const topMovies = data.results.slice(0, 5);
-  const latestMovies = data.results.slice(0, 10);
+  const latestMovies = data.results.slice(0, 9);
 
   const fetchTopMovies = async () => {
     const options = {
@@ -58,28 +58,35 @@ const Home = () => {
   }, []);
 
   return (
-    <View className='w-full h-full px-4 pt-8 bg-primary'>
-      <View>
-        {/* Top Movies */}
-        <Text className='text-2xl text-text font-acme'>Top Movies</Text>
-        <FlatList
-          data={topMovies}
-          renderItem={({ item }) => <MovieCardLarge movie={item} />}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          className='w-full'
-        />
+    <ScrollView>
+      <View className='w-full h-full px-4 pt-8 bg-primary'>
+        <View>
+          {/* Top Movies */}
+          <Text className='text-2xl text-text font-acme'>Top Movies</Text>
+          <FlatList
+            data={topMovies}
+            renderItem={({ item }) => <MovieCardLarge movie={item} />}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            className='w-full'
+          />
+        </View>
+        {/* TODO: Categories */}
+        {/* Latest Movies */}
+        <View className='mt-3'>
+          <Text className='text-2xl text-text font-acme'>Latest Movies</Text>
+          {/* Try ScrollList? */}
+          <FlatList
+            numColumns={3}
+            keyExtractor={(item) => item.id.toString()}
+            data={latestMovies}
+            renderItem={({ item }) => <MovieCardSmall movie={item} />}
+            columnWrapperStyle={{ justifyContent: 'space-between' }}
+            scrollEnabled={false}
+          />
+        </View>
       </View>
-      {/* TODO: Categories */}
-      {/* Latest Movies */}
-      <View>
-        <Text className='text-2xl text-text font-acme'>Latest Movies</Text>
-        <FlatList
-          data={latestMovies}
-          renderItem={({ item }) => <MovieCardSmall movie={item} />}
-        />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
