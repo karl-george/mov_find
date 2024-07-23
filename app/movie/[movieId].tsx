@@ -1,6 +1,7 @@
+import { Ionicons } from '@expo/vector-icons';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Image, Text, View } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
 
 type DetailedMovie = {
   adult: boolean;
@@ -63,6 +64,8 @@ const MovieId = () => {
   const [movie, setMovie] = useState<DetailedMovie>();
   const { movieId } = useLocalSearchParams();
 
+  const router = useRouter();
+
   const fetchMovie = async () => {
     const options = {
       method: 'GET',
@@ -91,11 +94,27 @@ const MovieId = () => {
 
   return (
     <View>
-      <Image
+      <ImageBackground
         src={`https://image.tmdb.org/t/p/w500/${movie?.backdrop_path}`}
-        className='w-full h-[220px]'
+        className='w-full h-[250px]'
         resizeMode='cover'
-      />
+      >
+        <TouchableOpacity onPress={router.back}>
+          <Ionicons
+            name='arrow-back'
+            size={24}
+            style={{
+              color: '#FAFAFA',
+              backgroundColor: '#222632',
+              borderRadius: 10,
+              padding: 10,
+              width: 46,
+              marginTop: 60,
+              marginLeft: 20,
+            }}
+          />
+        </TouchableOpacity>
+      </ImageBackground>
       <View className='w-full h-full px-6 bg-primary'>
         <Text className='mt-5 text-3xl text-center text-text font-acme'>
           {movie?.title}
@@ -116,7 +135,7 @@ const MovieId = () => {
           Release Date: {movie?.release_date}
         </Text>
         <Text className='mt-2 text-lg text-text font-acme'>
-          Rating: {movie?.vote_average.toFixed(1)}
+          Rating: {movie?.vote_average}
         </Text>
       </View>
     </View>
