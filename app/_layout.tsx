@@ -1,9 +1,11 @@
 import CustomHeader from '@/components/CustomHeader';
+import { Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
+import { TouchableOpacity } from 'react-native';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -17,6 +19,7 @@ const InitialLayout = () => {
   const [fontsLoaded, fontError] = useFonts({
     'Acme-Regular': require('../assets/fonts/Acme-Regular.ttf'),
   });
+
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
@@ -35,7 +38,12 @@ const InitialLayout = () => {
           header: () => <CustomHeader />,
         }}
       />
-      <Stack.Screen name='movie/[movieId]' options={{ headerShown: false }} />
+      <Stack.Screen
+        name='movie/[movieId]'
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 };
