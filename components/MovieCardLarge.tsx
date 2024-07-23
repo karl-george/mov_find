@@ -1,5 +1,5 @@
-import { View, Text, Image } from 'react-native';
-import React from 'react';
+import { View, Image } from 'react-native';
+import { Link } from 'expo-router';
 
 export type Movie = {
   adult: boolean;
@@ -20,12 +20,16 @@ export type Movie = {
 
 const MovieCardLarge = ({ movie }: { movie: Movie }) => {
   return (
-    <View className='w-[150px] h-[240px] py-3 rounded-md mr-3'>
-      <Image
-        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        className='w-full h-full rounded-md'
-        resizeMode='cover'
-      />
+    <View className='mr-3'>
+      <Link href={`/movie/${movie.id}`}>
+        <View className='w-[150px] h-[240px] py-3 rounded-md'>
+          <Image
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            className='w-full h-full rounded-md'
+            resizeMode='cover'
+          />
+        </View>
+      </Link>
     </View>
   );
 };
