@@ -35,6 +35,7 @@ const InitialLayout = () => {
           header: () => <CustomHeader />,
         }}
       />
+      <Stack.Screen name='movie/[movieId]' options={{ headerShown: false }} />
     </Stack>
   );
 };
