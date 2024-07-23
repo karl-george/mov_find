@@ -75,7 +75,7 @@ const Home = () => {
             className='w-full'
           />
         </View>
-        {/* TODO: Categories */}
+        {/* Categories */}
         <GenreList
           setGenreSelected={setGenreSelected}
           genreSelected={genreSelected}
@@ -83,7 +83,6 @@ const Home = () => {
         {/* Latest Movies */}
         <View className='mt-3'>
           <Text className='text-2xl text-text font-acme'>Latest Movies</Text>
-          {/* Try ScrollList? */}
           <FlatList
             numColumns={3}
             keyExtractor={(item) => item.id.toString()}
