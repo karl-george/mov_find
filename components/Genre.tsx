@@ -16,7 +16,7 @@ const Genre = ({ genre, setGenreSelected, genreSelected }: Props) => {
       <Text
         className={`mr-2 text-xl capitalize font-acme ${
           genreSelected.name === genre.name
-            ? 'text-text border-l border-blue-400 pl-1.5'
+            ? 'text-text border-l border-[#1E778F] pl-1.5'
             : 'text-tertiary'
         }`}
       >
