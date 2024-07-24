@@ -71,7 +71,7 @@ const MovieId = () => {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${process.env.EXPO_API_TOKEN}`,
+        Authorization: `Bearer ${process.env.EXPO_PUBLIC_API_TOKEN}`,
       },
     };
 
