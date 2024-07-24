@@ -35,7 +35,7 @@ const InitialLayout = () => {
       <Stack.Screen
         name='home'
         options={{
-          header: () => <CustomHeader />,
+          headerShown: false,
         }}
       />
       <Stack.Screen
@@ -47,7 +47,7 @@ const InitialLayout = () => {
       <Stack.Screen
         name='search/[query]'
         options={{
-          header: () => <CustomHeaderSearch />,
+          headerShown: false,
         }}
       />
     </Stack>

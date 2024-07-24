@@ -1,3 +1,4 @@
+import CustomHeader from '@/components/CustomHeader';
 import GenreList from '@/components/GenreList';
 import MovieCardLarge from '@/components/MovieCardLarge';
 import MovieCardSmall from '@/components/MovieCardSmall';
@@ -87,8 +88,9 @@ const Home = () => {
 
   return (
     <ScrollView>
-      <View className='w-full h-full px-4 pt-8 bg-primary'>
-        <View>
+      <View className='w-full h-full px-4 pt-4 bg-primary'>
+        <CustomHeader />
+        <View className='mt-6'>
           {/* Top Movies */}
           <Text className='text-2xl text-text font-acme'>Top Movies</Text>
           <FlatList

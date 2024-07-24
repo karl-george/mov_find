@@ -1,7 +1,8 @@
+import CustomHeaderSearch from '@/components/CustomHeaderSearch';
 import MovieCardSmall from '@/components/MovieCardSmall';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { FlatList, ScrollView, Text, View } from 'react-native';
 
 const Search = () => {
   const { query } = useLocalSearchParams();
@@ -35,8 +36,9 @@ const Search = () => {
 
   return (
     <ScrollView>
-      <View className='w-full h-full px-4 pt-6 bg-primary'>
-        <View>
+      <View className='w-full h-full px-4 pt-4 bg-primary'>
+        <CustomHeaderSearch />
+        <View className='mt-6'>
           <Text className='mb-4 text-2xl text-text font-acme'>{query}</Text>
           <FlatList
             numColumns={3}
