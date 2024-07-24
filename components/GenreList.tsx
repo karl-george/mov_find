@@ -4,7 +4,10 @@ import Genre from './Genre';
 
 interface Props {
   setGenreSelected: Function;
-  genreSelected: string;
+  genreSelected: {
+    name: string;
+    id: number;
+  };
 }
 
 const CategoryList = ({ setGenreSelected, genreSelected }: Props) => {
