@@ -2,6 +2,7 @@ import CustomHeader from '@/components/CustomHeader';
 import GenreList from '@/components/GenreList';
 import MovieCardLarge from '@/components/MovieCardLarge';
 import MovieCardSmall from '@/components/MovieCardSmall';
+import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { FlatList, ScrollView, Text, View } from 'react-native';
 
@@ -109,7 +110,14 @@ const Home = () => {
         {/* Latest Movies */}
         {genreSelected.name === 'Latest' ? (
           <View className='mt-3'>
-            <Text className='text-2xl text-text font-acme'>Latest Movies</Text>
+            <View className='flex-row items-center justify-between'>
+              <Text className='text-2xl text-text font-acme'>
+                Latest Movies
+              </Text>
+              <Link href={'/genre/[genre]'}>
+                <Text className='text-lg text-accent font-acme'>See More</Text>
+              </Link>
+            </View>
             <FlatList
               numColumns={3}
               keyExtractor={(item) => item.id.toString()}
@@ -121,9 +129,14 @@ const Home = () => {
           </View>
         ) : (
           <View className='mt-3'>
-            <Text className='text-2xl text-text font-acme'>
-              {genreSelected.name}
-            </Text>
+            <View className='flex-row items-center justify-between'>
+              <Text className='text-2xl text-text font-acme'>
+                {genreSelected.name}
+              </Text>
+              <Link href={'/genre/[genre]'}>
+                <Text className='text-lg text-accent font-acme'>See More</Text>
+              </Link>
+            </View>
             <FlatList
               numColumns={3}
               keyExtractor={(item) => item.id.toString()}
