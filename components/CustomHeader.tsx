@@ -1,10 +1,12 @@
-import { View, TextInput, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { usePathname, useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { Alert, TextInput, TouchableOpacity, View } from 'react-native';
 
 const CustomHeader = () => {
   const [query, setQuery] = useState('');
+  const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <View className='w-full h-16 px-4 py-14 bg-primary'>
@@ -16,7 +18,19 @@ const CustomHeader = () => {
           value={query}
           onChangeText={(e) => setQuery(e)}
         />
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            if (!query) {
+              return Alert.alert(
+                'No Search term',
+                'Please enter a search term'
+              );
+            }
+
+            if (pathname.startsWith('/search')) router.setParams({ query });
+            else router.push(`/search/${query}`);
+          }}
+        >
           <Ionicons name='search' size={26} color='#FAFAFA' />
         </TouchableOpacity>
       </View>

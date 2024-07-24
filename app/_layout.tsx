@@ -1,4 +1,5 @@
 import CustomHeader from '@/components/CustomHeader';
+import CustomHeaderSearch from '@/components/CustomHeaderSearch';
 import { Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import { Stack, useRouter } from 'expo-router';
@@ -19,7 +20,6 @@ const InitialLayout = () => {
   const [fontsLoaded, fontError] = useFonts({
     'Acme-Regular': require('../assets/fonts/Acme-Regular.ttf'),
   });
-
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
@@ -42,6 +42,12 @@ const InitialLayout = () => {
         name='movie/[movieId]'
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name='search/[query]'
+        options={{
+          header: () => <CustomHeaderSearch />,
         }}
       />
     </Stack>
