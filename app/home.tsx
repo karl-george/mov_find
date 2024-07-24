@@ -1,22 +1,21 @@
-import { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import GenreList from '@/components/GenreList';
 import MovieCardLarge from '@/components/MovieCardLarge';
 import MovieCardSmall from '@/components/MovieCardSmall';
-import GenreList from '@/components/GenreList';
+import { useEffect, useState } from 'react';
+import { FlatList, ScrollView, Text, View } from 'react-native';
 
-import { movies } from '../constants/data';
 const Home = () => {
-  const [genreSelected, setGenreSelected] = useState('Latest');
-
-  const topMovies = movies.results.slice(0, 5);
-  const latestMovies = movies.results.slice(0, 9);
+  const [genreSelected, setGenreSelected] = useState({ id: 0, name: 'Latest' });
+  const [moviesByGenre, setMoviesByGenre] = useState();
+  const [topMovies, setTopMovies] = useState();
+  const [latestMovies, setLatestMovies] = useState();
 
   const fetchTopMovies = async () => {
     const options = {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${process.env.EXPO_API_TOKEN}`,
+        Authorization: `Bearer ${process.env.EXPO_PUBLIC_API_TOKEN}`,
       },
     };
 
@@ -27,8 +26,7 @@ const Home = () => {
       );
 
       const data = await response.json();
-      console.log(data);
-      return data;
+      setTopMovies(data.results.slice(0, 5));
     } catch (error) {
       console.error(error);
     }
@@ -39,7 +37,7 @@ const Home = () => {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${process.env.EXPO_API_TOKEN}`,
+        Authorization: `Bearer ${process.env.EXPO_PUBLIC_API_TOKEN}`,
       },
     };
 
@@ -50,16 +48,42 @@ const Home = () => {
       );
 
       const data = await response.json();
-      console.log(data);
-      return data;
+      setLatestMovies(data.results.slice(0, 12));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchMoviesByGenre = async () => {
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${process.env.EXPO_PUBLIC_API_TOKEN}`,
+      },
+    };
+
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genreSelected.id}`,
+        options
+      );
+
+      const data = await response.json();
+      setMoviesByGenre(data.results.slice(0, 12));
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    // fetchTopMovies();
+    fetchTopMovies();
+    fetchLatestMovies();
   }, []);
+
+  useEffect(() => {
+    fetchMoviesByGenre();
+  }, [genreSelected]);
 
   return (
     <ScrollView>
@@ -81,17 +105,33 @@ const Home = () => {
           genreSelected={genreSelected}
         />
         {/* Latest Movies */}
-        <View className='mt-3'>
-          <Text className='text-2xl text-text font-acme'>Latest Movies</Text>
-          <FlatList
-            numColumns={3}
-            keyExtractor={(item) => item.id.toString()}
-            data={latestMovies}
-            renderItem={({ item }) => <MovieCardSmall movie={item} />}
-            columnWrapperStyle={{ justifyContent: 'space-between' }}
-            scrollEnabled={false}
-          />
-        </View>
+        {genreSelected.name === 'Latest' ? (
+          <View className='mt-3'>
+            <Text className='text-2xl text-text font-acme'>Latest Movies</Text>
+            <FlatList
+              numColumns={3}
+              keyExtractor={(item) => item.id.toString()}
+              data={latestMovies}
+              renderItem={({ item }) => <MovieCardSmall movie={item} />}
+              columnWrapperStyle={{ justifyContent: 'space-between' }}
+              scrollEnabled={false}
+            />
+          </View>
+        ) : (
+          <View className='mt-3'>
+            <Text className='text-2xl text-text font-acme'>
+              {genreSelected.name}
+            </Text>
+            <FlatList
+              numColumns={3}
+              keyExtractor={(item) => item.id.toString()}
+              data={moviesByGenre}
+              renderItem={({ item }) => <MovieCardSmall movie={item} />}
+              columnWrapperStyle={{ justifyContent: 'space-between' }}
+              scrollEnabled={false}
+            />
+          </View>
+        )}
       </View>
     </ScrollView>
   );
