@@ -5,7 +5,11 @@ import { router } from 'expo-router';
 export default function Index() {
   return (
     <View className='w-full h-full px-6 bg-primary'>
-      <Image className='flex-1' />
+      <Image
+        source={require('../assets/images/app-logo.png')}
+        className='flex-1 w-full h-full mt-32'
+        resizeMode='cover'
+      />
       <View className='py-24'>
         <Text className='text-4xl leading-[48px] text-center text-white font-acme'>
           Find The Perfect Movies For You
