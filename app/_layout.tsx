@@ -50,6 +50,12 @@ const InitialLayout = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name='genre/[genre]'
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 };
