@@ -114,7 +114,7 @@ const Home = () => {
               <Text className='text-2xl text-text font-acme'>
                 Latest Movies
               </Text>
-              <Link href={'/genre/[genre]'}>
+              <Link href={`/genre/latest`}>
                 <Text className='text-lg text-accent font-acme'>See More</Text>
               </Link>
             </View>
@@ -133,7 +133,7 @@ const Home = () => {
               <Text className='text-2xl text-text font-acme'>
                 {genreSelected.name}
               </Text>
-              <Link href={'/genre/[genre]'}>
+              <Link href={`/genre/${genreSelected.id}`}>
                 <Text className='text-lg text-accent font-acme'>See More</Text>
               </Link>
             </View>
