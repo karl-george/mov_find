@@ -1,12 +1,8 @@
-import CustomHeader from '@/components/CustomHeader';
-import CustomHeaderSearch from '@/components/CustomHeaderSearch';
-import { Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
-import { Stack, useRouter } from 'expo-router';
+import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import { TouchableOpacity } from 'react-native';
 
 export {
   // Catch any errors thrown by the Layout component.
