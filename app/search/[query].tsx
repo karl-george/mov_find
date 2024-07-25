@@ -24,7 +24,7 @@ const Search = () => {
       );
 
       const data = await response.json();
-      setMovies(data.results);
+      setMovies(data.results.slice(0, 18));
     } catch (error) {
       console.error(error);
     }
