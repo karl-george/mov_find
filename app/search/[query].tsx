@@ -7,6 +7,7 @@ import { FlatList, ScrollView, Text, View } from 'react-native';
 const Search = () => {
   const { query } = useLocalSearchParams();
   const [movies, setMovies] = useState();
+  const [page, setPage] = useState(1);
 
   const fetchMovies = async () => {
     const options = {
@@ -19,12 +20,19 @@ const Search = () => {
 
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
+        `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}`,
         options
       );
 
       const data = await response.json();
-      setMovies(data.results.slice(0, 18));
+      if (page === 1) {
+        setMovies(data.results.slice(0, 18));
+      } else {
+        setMovies((prevMovies) => [
+          ...prevMovies,
+          ...data.results.slice(0, 18),
+        ]);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -32,25 +40,25 @@ const Search = () => {
 
   useEffect(() => {
     fetchMovies();
-  }, [query]);
+  }, [query, page]);
 
   return (
-    <ScrollView>
-      <View className='w-full h-full px-4 pt-4 bg-primary'>
-        <CustomHeaderSearch />
-        <View className='mt-6'>
-          <Text className='mb-4 text-2xl text-text font-acme'>{query}</Text>
-          <FlatList
-            numColumns={3}
-            keyExtractor={(item) => item.id.toString()}
-            data={movies}
-            renderItem={({ item }) => <MovieCardSmall movie={item} />}
-            columnWrapperStyle={{ justifyContent: 'space-between' }}
-            scrollEnabled={false}
-          />
-        </View>
+    <View className='w-full h-full px-4 pt-4 bg-primary'>
+      <CustomHeaderSearch />
+      <View className='mt-6'>
+        <Text className='mb-4 text-2xl text-text font-acme'>{query}</Text>
+        <FlatList
+          numColumns={3}
+          keyExtractor={(item) => item.id.toString()}
+          data={movies}
+          renderItem={({ item }) => <MovieCardSmall movie={item} />}
+          columnWrapperStyle={{ justifyContent: 'space-between' }}
+          showsVerticalScrollIndicator={false}
+          onEndReached={() => setPage(page + 1)}
+          className='mb-40'
+        />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
