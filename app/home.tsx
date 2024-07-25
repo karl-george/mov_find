@@ -91,7 +91,7 @@ const Home = () => {
     <ScrollView>
       <View className='w-full h-full px-4 pt-4 bg-primary'>
         <CustomHeader />
-        <View className='mt-6'>
+        <View className='mt-6 mb-6'>
           {/* Top Movies */}
           <Text className='text-2xl text-text font-acme'>Top Movies</Text>
           <FlatList
@@ -109,11 +109,9 @@ const Home = () => {
         />
         {/* Latest Movies */}
         {genreSelected.name === 'Latest' ? (
-          <View className='mt-3'>
-            <View className='flex-row items-center justify-between'>
-              <Text className='text-2xl text-text font-acme'>
-                Latest Movies
-              </Text>
+          <View className='mt-6'>
+            <View className='flex-row items-center justify-between mb-3'>
+              <Text className='text-2xl text-text font-acme'>Latest</Text>
               <Link href={`/genre/latest`}>
                 <Text className='text-lg text-accent font-acme'>See More</Text>
               </Link>
@@ -128,8 +126,8 @@ const Home = () => {
             />
           </View>
         ) : (
-          <View className='mt-3'>
-            <View className='flex-row items-center justify-between'>
+          <View className='mt-6'>
+            <View className='flex-row items-center justify-between mb-3'>
               <Text className='text-2xl text-text font-acme'>
                 {genreSelected.name}
               </Text>
